@@ -1,0 +1,6 @@
+{
+  "port":"8088",
+  "js":"static/js/",
+  "css":"static/css/",
+  "html":"static/pages/"
+}
