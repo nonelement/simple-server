@@ -43,7 +43,6 @@ func readConfig(file string) (settings config) {
 }
 
 func setHTTPHandlers() {
-  fmt.Printf("%+v\n", settings)
   if settings.JS != "" {
     http.Handle("/js/", http.StripPrefix("/js/", http.FileServer(http.Dir(settings.JS))))
   }
