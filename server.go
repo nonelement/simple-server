@@ -10,7 +10,7 @@ import (
 
 type config struct {
   Port string
-  JS, CSS, HTML string
+  Serve string
 }
 
 func (c *config) getPort() string {
@@ -18,7 +18,7 @@ func (c *config) getPort() string {
 }
 
 var (
-  settings config 
+  settings config
 )
 
 func init() {
@@ -34,7 +34,7 @@ func readConfig(file string) (settings config) {
   })()
   contents, err := ioutil.ReadFile(file)
   if err==nil {
-    err = json.Unmarshal(contents, &settings) 
+    err = json.Unmarshal(contents, &settings)
   }
   if err!=nil {
       panic("Unable to read configuration file. Cannot start server.")
@@ -43,14 +43,8 @@ func readConfig(file string) (settings config) {
 }
 
 func setHTTPHandlers() {
-  if settings.JS != "" {
-    http.Handle("/js/", http.StripPrefix("/js/", http.FileServer(http.Dir(settings.JS))))
-  }
-  if settings.CSS != "" {
-    http.Handle("/css/", http.StripPrefix("/css/", http.FileServer(http.Dir(settings.CSS))))
-  }
-  if settings.HTML != "" {
-    http.Handle("/", http.StripPrefix("/", http.FileServer(http.Dir(settings.HTML))))
+  if settings.Serve != "" {
+    http.Handle("/", http.StripPrefix("/", http.FileServer(http.Dir(settings.Serve))))
   }
 }
 

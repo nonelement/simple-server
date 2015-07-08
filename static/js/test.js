@@ -1,3 +1,1 @@
-document.body.onload = function () {
-  document.title = "Server up";
-}
+console.log("Scripts loaded.");
